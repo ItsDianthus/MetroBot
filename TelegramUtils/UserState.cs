@@ -20,8 +20,8 @@ namespace TelegramUtils
         {
             // Getting the separator char for our operating system.
             private static readonly char Separator = Path.DirectorySeparatorChar;
-            private readonly string _systemFile =
-                    $"..{Separator}..{Separator}..{Separator}..{Separator}WorkingFiles{Separator}States.txt";
+            //private readonly string _systemFile =
+            //        $"..{Separator}..{Separator}..{Separator}..{Separator}WorkingFiles{Separator}States.txt";
             private static Dictionary<long, List<string>> _allUsersState = new Dictionary<long, List<string>>();
 
 
@@ -31,14 +31,14 @@ namespace TelegramUtils
             /// <param name="chatId">The ID of the user's chat.</param>
             public void AddUserToDict(long chatId)
             {
-                // ДОБАВИЛИ ЮЗЕРА В ФАЙЛИК ДЛЯ ЗАПОМИНАНИЯ
+                // ДОБАВИЛИ ЮЗЕРА В ФАЙЛИК ДЛЯ ЗАПОМИНАНИЯ.
                 _allUsersState[chatId] = new List<string>{ "start", "pathToFile"};
                 string newStateLine = chatId.ToString() + ":start:path";
 
-                using (var streamWriter = new StreamWriter(_systemFile))
-                {
-                    streamWriter.WriteLine(newStateLine);
-                }
+                //using (var streamWriter = new StreamWriter(_systemFile))
+                //{
+                //    streamWriter.WriteLine(newStateLine);
+                //}
             }
 
             /// <summary>
@@ -91,69 +91,6 @@ namespace TelegramUtils
             public string GetUserPath(long chatId)
             {
                 return _allUsersState[chatId][1];
-            }
-
-            /// <summary>
-            /// Adds a new user entry to the system file if it does not already exist.
-            /// </summary>
-            /// <param name="chatId">The ID of the user's chat.</param>
-            public void AddUser(long chatId)
-            {
-                var lines = new List<string>();
-
-                using (var streamReader = new StreamReader(_systemFile))
-                {
-                    while (streamReader.ReadLine() is { } line)
-                    {
-                        lines.Add(line);
-                    }
-                }
-
-                if (!lines.Any(line => line.Contains(chatId.ToString())))
-                {
-                    lines.Add($"{chatId}: pass: false");
-                }
-
-                using (var streamWriter = new StreamWriter(_systemFile))
-                {
-                    foreach (var line in lines)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
-            }
-
-            /// <summary>
-            /// Adds a file path to the user's entry in the system file.
-            /// </summary>
-            /// <param name="chatId">The ID of the user's chat.</param>
-            /// <param name="filePath">The file path to add.</param>
-            public void AddFileToUser(long chatId, string filePath)
-            {
-                var lines = new List<string>();
-
-                using (var streamReader = new StreamReader(_systemFile))
-                {
-                    while (streamReader.ReadLine() is { } line)
-                    {
-                        lines.Add(line);
-                    }
-                }
-
-                foreach (var line in lines.Where(line => line.Contains(chatId.ToString())))
-                {
-                    var values = line.Split(": ");
-                    lines[Array.IndexOf(lines.ToArray(), line)] = $"{values[0]}: {filePath}: {values[2]}";
-                    break;
-                }
-
-                using (var streamWriter = new StreamWriter(_systemFile))
-                {
-                    foreach (var line in lines)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
             }
 
         }
