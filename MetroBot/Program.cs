@@ -24,6 +24,7 @@ namespace MetroBot
                 TelegramMetroBot metroBot = new TelegramMetroBot();
                 // Start the Telegram bot, allowing it to receive updates and respond to user input.
                 metroBot.Start();
+                Thread.Sleep(-1);
             }
             catch (Exception)
             {
