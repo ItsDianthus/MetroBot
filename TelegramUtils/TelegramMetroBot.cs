@@ -44,7 +44,7 @@ namespace TelegramUtils
                 cancellationToken: cts.Token
             );
 
-            Console.ReadLine();
+            Thread.Sleep(-1);
             cts.Cancel();
         }
         
