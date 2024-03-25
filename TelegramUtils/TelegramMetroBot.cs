@@ -59,7 +59,7 @@ namespace TelegramUtils
 
             if (update.Message is { } message)
             {
-                //long chatId = message.Chat.Id;
+                long chatId = message.Chat.Id;
                 Console.WriteLine($"Received a '{message.Text}' message in chat {chatId}.");
                 if (message.Text is { } messageText)
                 {
