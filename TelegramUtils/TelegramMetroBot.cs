@@ -63,11 +63,11 @@ namespace TelegramUtils
                 Console.WriteLine($"Received a '{message.Text}' message in chat {chatId}.");
                 if (message.Text is { } messageText)
                 {
-                    //await HandleUserMessage(botClient, chatId, cancellationToken, messageText, state);
+                    await HandleUserMessage(botClient, chatId, cancellationToken, messageText, state);
                 }
                 else if (message.Document is { } messageDoc) // DOCUMENTTTT
                 {
-                    //await HandleUserDocument(botClient, chatId, cancellationToken, messageDoc);
+                    await HandleUserDocument(botClient, chatId, cancellationToken, messageDoc);
                 }
             }
             else if (update.CallbackQuery is { } callbackQuery)
