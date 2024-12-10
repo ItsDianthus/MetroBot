@@ -22,7 +22,7 @@ namespace TelegramUtils
         // Constructor without any parameters.
         public TelegramMetroBot()
         {
-            _client = new TelegramBotClient("7170064401:AAHPDL81nQOvKL7DTuJlyiErbOwQD4xp2Dc");
+            _client = new TelegramBotClient("### Код БОТА"); #DEBUG
         }
 
         /// <summary>
